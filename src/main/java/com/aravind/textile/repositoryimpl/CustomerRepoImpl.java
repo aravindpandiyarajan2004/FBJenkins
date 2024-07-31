@@ -14,7 +14,8 @@ import jakarta.transaction.Transactional;
 @Repository
 @Transactional
 public class CustomerRepoImpl implements CustomerRepo {
-
+	static final String SUCCESS = "Success";
+	static final String FAILURE = "Failure";
 	EntityManager em;
 
 	public CustomerRepoImpl(EntityManager em) {
@@ -26,9 +27,9 @@ public class CustomerRepoImpl implements CustomerRepo {
 	public String save(Customer customer) {
 		if (customer != null) {
 			em.merge(customer);
-			return "Success";
+			return SUCCESS;
 		} else {
-			return "Failure";
+			return FAILURE;
 		}
 
 	}
@@ -44,9 +45,9 @@ public class CustomerRepoImpl implements CustomerRepo {
 	public String update(Customer customer) {
 		if(customer != null) {
 			em.merge(customer);
-			return "Success";
+			return SUCCESS;
 		}
-		return "Failure";
+		return FAILURE;
 		
 
 	}
@@ -61,9 +62,9 @@ public class CustomerRepoImpl implements CustomerRepo {
 		Customer id = em.find(Customer.class, customerId);
 		if(id != null) {
 			em.remove(id);
-			return "Success";
+			return SUCCESS;
 		}
-		return "Failure";
+		return FAILURE;
 		
 	}
 
